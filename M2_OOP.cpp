@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <iomanip>
 using namespace std;
 
@@ -14,36 +13,40 @@ class Representante{
         Representante(int i) : id(i) {}
 
         void registrarVenda(int numItens, double valorVenda){
+
             itens += numItens;
             valor += valorVenda;
+
             if (itens >= 20 && com != 0.25){
                 atualizarComissao();
             }
+
             com = valor * comVal; // calcula comissão
         }
 
         void atualizarComissao(){
+
             if (itens < 50){
                 comVal = 0.15;
+
             } else if (itens < 75){
                 comVal = 0.2;
+                
             } else {
                 comVal = 0.25;
             }
         }
 };
 
-
-vector<Representante> reps = {
+Representante reps[4]{
     Representante(1),
     Representante(2),
     Representante(3),
     Representante(4)
 };
 
-
-
 double totalVendas() {
+    /*Calcula o valor total das vendas de todos os representantes*/
     double totalValor = 0.0;
     for (const Representante& r : reps){
         totalValor += r.valor;
@@ -51,7 +54,7 @@ double totalVendas() {
     return totalValor;
 }
 
-void opcao3(){
+void opcao3(){ // Mostra quanto cada representante vai receber de comissão
     cout << "O total de comissões por representante é: " << endl;
                 
     for (const Representante& r : reps){
@@ -59,7 +62,7 @@ void opcao3(){
     }
 }
 
-void opcao4(){
+void opcao4(){ // Calcula e mostra o total de comissões a serem pagas para todos os representantes
     double totalCom = 0.0;
     for (const Representante& r : reps){
         totalCom += r.com;
@@ -67,7 +70,7 @@ void opcao4(){
     cout << "O total geral de comissões a serem pagas é: R$" << totalCom << endl;
 }
 
-bool nenhumaVenda(){
+bool nenhumaVenda(){ // Verifica se houve alguma venda registrada
     for (const Representante& r : reps){
         if (r.valor != 0.0){
             return false;
@@ -76,7 +79,7 @@ bool nenhumaVenda(){
     return true;
 }
 
-bool alguemNaoVendeu(){
+bool alguemNaoVendeu(){ // Verifica se alguém vendeu 0 itens
     for (const Representante& r : reps){
         if (r.itens == 0){
             return true;
@@ -85,7 +88,7 @@ bool alguemNaoVendeu(){
     return false;
 }
 
-void maiorValor(){
+void maiorValor(){ // Verifica e mostra quem teve o maior valor em vendas
     Representante champ(0);
     for (const Representante& r : reps){
         if (r.valor > champ.valor){
@@ -96,7 +99,7 @@ void maiorValor(){
     cout << "Ele vendeu, no total: R$" << champ.valor << endl;
 }
 
-void menosItens(){
+void menosItens(){ // Verifica e mostra quem vendeu o menor número de itens
     Representante loser(0);
     for (const Representante& r : reps){
         if (r.itens <= loser.itens){
@@ -116,7 +119,7 @@ int main(){
         char p;
 
     do{
-        do{
+        do{ //Menu
             cout << endl << "==== MENU - SISTEMA DE COMISSÕES ====" << endl;
             cout << "1 - Registar nova venda" << endl;
             cout << "2 - Exibir total de vendas processadas" << endl;
@@ -147,15 +150,12 @@ int main(){
                         cin >> valor;
                     }while(valor <= 0.0);
 
-                    for (Representante& r : reps){
-                        if (r.id == rep){
-                            r.registrarVenda(numItens, valor);
-                        }
-                    }
+                    reps[rep-1].registrarVenda(numItens, valor); // Usa input para selecionar rep
 
                     vendasProcessadas++; // atualiza quantidade total de vendas
                     
                     cin.ignore();
+                    
                     do{
 
                         cout << "Deseja informar mais uma venda? (S/N) " << endl;
@@ -168,7 +168,7 @@ int main(){
                 break; // quebra switch de opção
 
             case 2:
-                cout << "O total acumulado de vendas processdas é " << vendasProcessadas << endl << "Para um valor de R$" << totalVendas() << endl;
+                cout << "O total acumulado de vendas processadas é " << vendasProcessadas << endl << "Para um valor de R$" << totalVendas() << endl;
                 break;
 
             case 3: opcao3();
@@ -198,5 +198,5 @@ int main(){
         }
     }while (o != 7);
     
-return 0;
+    return 0;
 }

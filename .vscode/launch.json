@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Cliente/Documents/GitHub/Projeto M2__OOP",
-      "program": "c:/Users/Cliente/Documents/GitHub/Projeto M2__OOP/build/Release/outRelease",
+      "cwd": "c:/Users/mpben/Documents/GitHub/Projeto-M2__OOP",
+      "program": "c:/Users/mpben/Documents/GitHub/Projeto-M2__OOP/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
